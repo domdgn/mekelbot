@@ -10,6 +10,7 @@ const gold: ICommand = {
         reply(selectRandom(messages.gold));
     },
     name: "gold",
+    parameters: { aliases: ["glod"] },
     description: "Celebrate a gold split with us!"
 };
 
