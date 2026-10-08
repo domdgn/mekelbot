@@ -1,7 +1,7 @@
 import { StaticAuthProvider } from "@twurple/auth";
 import { Bot } from "@twurple/easy-bot";
 import { env } from "./utils/env.js";
-import { createCommands, commands, init } from "./utils/utils.js";
+import { createCommands, commands } from "./utils/utils.js";
 
 const authProvider = new StaticAuthProvider(env.clientID, env.accessToken);
 
@@ -29,6 +29,5 @@ bot.onRaid(({ broadcasterName, userName, viewerCount }) => {
 });
 
 bot.onConnect(async () => {
-    await init();
     console.log("hi im mekel egg bot");
 });

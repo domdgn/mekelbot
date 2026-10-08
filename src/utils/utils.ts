@@ -11,8 +11,6 @@ import { pb } from "../commands/pb.js";
 import { lurk } from "../commands/lurk.js";
 import { freak } from "../commands/freak.js";
 import { avery } from "../commands/avery.js";
-import { env } from "./env.js";
-import { obs } from "./obs.js";
 
 /** Reference to all commands in the bot. */
 const commands = [ brown, gold, fortune, isthisgoingtopb, gg, woof, avery, lurk, pb, freak, help, ];
@@ -93,11 +91,5 @@ const getOrdinal = (n: number) => {
 
     return ordinal;
 };
-/**
- * Initialises the bot. Currently only connects OBS, but more can be added in the future.
- */
-const init = async () => {
-    await obs.connect(env.obsAddress, env.obsPassword, {});
-};
 
-export { selectRandom, createCommands, commandListString, commands, getOrdinal, init };
+export { selectRandom, createCommands, commandListString, commands, getOrdinal };
