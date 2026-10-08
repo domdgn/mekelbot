@@ -22,7 +22,7 @@ const isthisgoingtopb: ICommand = {
     },
     name: "pbchance",
     parameters: { aliases: ["willthispb", "isthisgoingtopb"] },
-    description: "Calculates using advanced prediction mathematics (AKA Math.random()) to see if puppy will pb this run!"
+    description: "Calculates using advanced prediction mathematics (AKA Math.random()) to see if mekel will pb this run!"
 };
 
 export { isthisgoingtopb };

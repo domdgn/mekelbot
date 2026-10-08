@@ -7,7 +7,7 @@ const authProvider = new StaticAuthProvider(env.clientID, env.accessToken);
 
 const bot = new Bot({
     authProvider,
-    channel: "averypuppy",
+    channel: "mekelec_",
     commands: createCommands(commands)
 });
 
@@ -24,11 +24,11 @@ bot.onSubGift(({ broadcasterName, gifterName, userName }) => {
 });
 
 bot.onRaid(({ broadcasterName, userName, viewerCount }) => {
-    const pupText = (viewerCount <= 1) ? "puppy" : "puppies";
+    const pupText = (viewerCount <= 1) ? "egg" : "egg";
     bot.say(broadcasterName, `AWOO!!! ${userName} is raiding with ${viewerCount} ${pupText}!!!`);
 });
 
 bot.onConnect(async () => {
     await init();
-    console.log("woof woof it workin");
+    console.log("hi im mekel egg bot");
 });

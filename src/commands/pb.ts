@@ -6,7 +6,7 @@ const pb: ICommand = {
         reply(`/me ${await getPBs()}`);
     },
     name: "pb",
-    description: "Retrieves avery's PB on the speedrun.com leaderboard!"
+    description: "Retrieves mekels's PB on the speedrun.com leaderboard!"
 };
 
 export { pb };

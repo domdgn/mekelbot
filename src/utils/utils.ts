@@ -10,13 +10,12 @@ import { woof } from "../commands/woof.js";
 import { pb } from "../commands/pb.js";
 import { lurk } from "../commands/lurk.js";
 import { freak } from "../commands/freak.js";
-import { endStream } from "../commands/endstream.js";
+import { avery } from "../commands/avery.js";
 import { env } from "./env.js";
 import { obs } from "./obs.js";
-import { wheatley } from "../commands/wheatley.js";
 
 /** Reference to all commands in the bot. */
-const commands = [ brown, gold, fortune, isthisgoingtopb, gg, wheatley, woof, lurk, pb, freak, help, endStream ];
+const commands = [ brown, gold, fortune, isthisgoingtopb, gg, woof, avery, lurk, pb, freak, help, ];
 
 /**
  * Selects a random item from a given list.

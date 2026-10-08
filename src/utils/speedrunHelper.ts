@@ -2,7 +2,7 @@ import axios from "axios";
 import { getOrdinal } from "./utils.js";
 
 const URL = "https://www.speedrun.com/api/v1";
-const USER_ID = "j96647rj";
+const USER_ID = "e8evrdox";
 const GAME_ID = "om1mw4d2";
 const currDate = new Date();
 
