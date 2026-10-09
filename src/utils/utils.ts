@@ -1,4 +1,4 @@
-import { createBotCommand, type BotCommand } from "@twurple/easy-bot";
+import { createBotCommand, type BotCommand, BotCommandContext } from "@twurple/easy-bot";
 import type { ICommand } from "../interfaces/ICommand.js";
 import { brown } from "../commands/brown.js";
 import { fortune } from "../commands/fortune.js";
@@ -33,7 +33,7 @@ const selectRandom = <T> (list: T[]): T=> {
 const createSoloCommand = (command: ICommand) => {
     if (!command.parameters) { command.parameters = {}; }
 
-    return createBotCommand(command.name, (params, { reply }) => {
+    return createBotCommand(command.name, (params, { reply, BotCommandContext }) => {
         command.function(reply, params);
     }, command.parameters);
 };
