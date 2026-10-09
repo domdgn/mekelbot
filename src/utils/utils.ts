@@ -13,7 +13,8 @@ import { freak } from "../commands/freak.js";
 import { avery } from "../commands/avery.js";
 
 /** Reference to all commands in the bot. */
-const commands = [ brown, gold, fortune, isthisgoingtopb, gg, woof, avery, lurk, pb, freak, help, ];
+const commands = [ brown, gold, fortune, isthisgoingtopb, gg, woof, avery, lurk, pb, freak, help, saymyname,];
+const helpCmds = [ brown, gold, fortune, isthisgoingtopb, gg, woof, avery, lurk, pb, freak, help, ]
 
 /**
  * Selects a random item from a given list.
@@ -69,7 +70,7 @@ const helpCommandGeneration = (commands: ICommand[]) => {
 /**
  * String of the command names for use in the help command.
  */
-const commandListString = helpCommandGeneration(commands);
+const commandListString = helpCommandGeneration(helpCmds);
 
 
 /**
