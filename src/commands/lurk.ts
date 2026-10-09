@@ -1,11 +1,11 @@
 import type { ICommand } from "../interfaces/ICommand.js";
 
 const lurk: ICommand = {
-    function: (reply: (text: string) => void) => {
-        reply("/me is now lurking :3");
+    function: async (context) => {
+        await context.reply("${context.userDisplayName} is now lurking! :3");
     },
     name: "lurk",
-    description: "Tells us that you are lurking :3"
+    description: "Tells us that you're lurking :3"
 };
 
 export { lurk };

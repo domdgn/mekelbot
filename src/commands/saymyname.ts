@@ -1,11 +1,11 @@
 import type { ICommand } from "../interfaces/ICommand.js";
 
 const saymyname: ICommand = {
-    function: (reply: (text: string) => void) => {
-        reply(userDisplayName);
+    function: async (context) => {
+        await context.reply("${context.userDisplayName}");
     },
     name: "saymyname",
-    description: "Says your name"
+    description: "It... um... says your name..."
 };
 
 export { saymyname };
