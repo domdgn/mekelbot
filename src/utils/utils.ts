@@ -11,9 +11,10 @@ import { pb } from "../commands/pb.js";
 import { lurk } from "../commands/lurk.js";
 import { freak } from "../commands/freak.js";
 import { avery } from "../commands/avery.js";
+import { saymyname } from "../commands/saymyname.js";
 
 /** Reference to all commands in the bot. */
-const commands = [ brown, gold, fortune, isthisgoingtopb, gg, woof, avery, lurk, pb, freak, help, saymyname,];
+const commands = [ brown, gold, fortune, isthisgoingtopb, gg, woof, avery, lurk, pb, freak, help, saymyname, ];
 const helpCmds = [ brown, gold, fortune, isthisgoingtopb, gg, woof, avery, lurk, pb, freak, help, ]
 
 /**
