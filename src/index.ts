@@ -29,6 +29,5 @@ bot.onRaid(({ broadcasterName, userName, viewerCount }) => {
 });
 
 bot.onConnect(() => {
-    void init();
     console.log("woof woof it workin");
 });
