@@ -13,7 +13,7 @@ import { freak } from "../commands/freak.js";
 import { avery } from "../commands/avery.js";
 import { saymyname } from "../commands/saymyname.js";
 import { discord } from "../commands/discord.js";
-import { extremegaming } from "../commands/extremegaming.js";
+import { extremegaming } from "../commands/extreme.js";
 import { followage } from "../commands/followage.js";
 
 /** Reference to all commands in the bot. */
