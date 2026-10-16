@@ -1,10 +1,10 @@
 import type { ICommand } from "../interfaces/ICommand.js";
 import { selectRandom } from "../utils/utils.js";
-import messages from "../data/messages.json" with { type: "json" };
+import { getMessages } from "../utils/messages.js";
 
 const woof: ICommand = {
     function: async (context) => {
-        await context.reply(selectRandom(messages.woof));
+        await context.reply(selectRandom(getMessages("woof")));
     },
     name: "woof",
     parameters: { aliases: ["puppy", "dog"] },

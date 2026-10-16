@@ -1,6 +1,6 @@
 import type { ICommand } from "../interfaces/ICommand.js";
 import { selectRandom } from "../utils/utils.js";
-import messages from "../data/messages.json" with { type: "json" };
+import { getMessages } from "../utils/messages.js";
 
 const isthisgoingtopb: ICommand = {
     function: async (context) => {
@@ -8,11 +8,11 @@ const isthisgoingtopb: ICommand = {
         let verdict: string;
 
         if (chance >= 90) {
-            verdict = String(selectRandom(messages.pbHigh));
+            verdict = String(selectRandom(getMessages("pbHigh")));
         } else if (chance >= 50) {
-            verdict = String(selectRandom(messages.pbMed));
+            verdict = String(selectRandom(getMessages("pbMed")));
         } else {
-            verdict = String(selectRandom(messages.pbLow));
+            verdict = String(selectRandom(getMessages("pbLow")));
         }
 
         await context.reply(`/me ${verdict} | PB Chance: ${chance}%`);

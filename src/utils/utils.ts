@@ -15,9 +15,10 @@ import { saymyname } from "../commands/saymyname.js";
 import { discord } from "../commands/discord.js";
 import { extremegaming } from "../commands/extreme.js";
 import { followage } from "../commands/followage.js";
+import { addreply } from "../commands/addreply.js";
 
 /** Reference to all commands in the bot. */
-const commands = [ extremegaming, followage, brown, gold, fortune, isthisgoingtopb, gg, woof, avery, lurk, pb, freak, help, saymyname, discord, ];
+const commands = [ addreply, extremegaming, followage, brown, gold, fortune, isthisgoingtopb, gg, woof, avery, lurk, pb, freak, help, saymyname, discord, ];
 const helpCmds = [ brown, gold, fortune, isthisgoingtopb, gg, woof, avery, lurk, discord, freak, help, ]
 
 /**
