@@ -1,9 +1,12 @@
 import { StaticAuthProvider } from "@twurple/auth";
+import { ApiClient } from "@twurple/api";
 import { Bot } from "@twurple/easy-bot";
 import { env } from "./utils/env.js";
 import { createCommands, commands } from "./utils/utils.js";
 
 const authProvider = new StaticAuthProvider(env.clientID, env.accessToken);
+
+export const apiClient = new ApiClient({ authProvider });
 
 const bot = new Bot({
     authProvider,

@@ -1,21 +1,19 @@
 import { createBotCommand, type BotCommand } from "@twurple/easy-bot";
 import type { ICommand } from "../interfaces/ICommand.js";
-import {
-    brown,
-    fortune,
-    gg,
-    gold,
-    help,
-    isthisgoingtopb,
-    woof,
-    pb,
-    lurk,
-    freak,
-    avery,
-    saymyname,
-    discord,
-    followage
-} from "../commands/index.js";
+import { brown } from "../commands/brown.js";
+import { fortune } from "../commands/fortune.js";
+import { gg } from "../commands/gg.js";
+import { gold } from "../commands/gold.js";
+import { help } from "../commands/help.js";
+import { isthisgoingtopb } from "../commands/isthisgoingtopb.js";
+import { woof } from "../commands/woof.js";
+import { pb } from "../commands/pb.js";
+import { lurk } from "../commands/lurk.js";
+import { freak } from "../commands/freak.js";
+import { avery } from "../commands/avery.js";
+import { saymyname } from "../commands/saymyname.js";
+import { discord } from "../commands/discord.js";
+import { followage } from "../commands/followage.js";
 
 /** Reference to all commands in the bot. */
 const commands = [ followage, brown, gold, fortune, isthisgoingtopb, gg, woof, avery, lurk, pb, freak, help, saymyname, discord, ];

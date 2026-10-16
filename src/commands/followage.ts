@@ -1,37 +1,50 @@
+
 import type { ICommand } from "../interfaces/ICommand.js";
+import { apiClient } from "../index.js";
 
 const followage: ICommand = {
     function: async (context) => {
-        const broadcasterId = context.channelId;
-        const userId = context.userId;
-
-        const { data: [follow] } =
-            await apiClient.channels.getChannelFollowers(
-                broadcasterId,
-                userId
+        try {
+            const { data } = await apiClient.channels.getChannelFollowers(
+                context.broadcasterId,
+                context.userId
             );
 
-        if (!follow) {
+            const follow = data[0];
+
+            if (!follow) {
+                await context.reply(
+                    `${context.userDisplayName} isn't following ${context.broadcasterName}.`
+                );
+                return;
+            }
+
+            const daysFollowing = Math.floor(
+                (Date.now() - follow.followDate.getTime()) / 86_400_000
+            );
+
+            const years = Math.floor(daysFollowing / 365);
+            const months = Math.floor((daysFollowing % 365) / 30);
+            const days = daysFollowing - years * 365 - months * 30;
+
+            const duration = [
+                years ? `${years} year${years === 1 ? "" : "s"}` : "",
+                months ? `${months} month${months === 1 ? "" : "s"}` : "",
+                days ? `${days} day${days === 1 ? "" : "s"}` : ""
+            ].filter(Boolean).join(", ") || "less than a day";
+
             await context.reply(
-                `${context.userDisplayName} isn't following this channel.`
+                `${context.userDisplayName} has been following ${context.broadcasterName} for ${duration}!`
             );
-            return;
+        } catch (error) {
+            console.error("Failed to get followage:", error);
+            await context.reply(
+                "Couldn't check followage. Check the bot's Twitch API permissions."
+            );
         }
-
-        const followedAt = new Date(follow.followDate);
-        const now = new Date();
-
-        const daysFollowing = Math.floor(
-            (now.getTime() - followedAt.getTime()) /
-            (1000 * 60 * 60 * 24)
-        );
-
-        await context.reply(
-            `${context.userDisplayName} has been following for ${daysFollowing} days!`
-        );
     },
     name: "followage",
-    description: "Check your followage!"
+    description: "Check how long you've been following the channel!"
 };
 
 export { followage };
