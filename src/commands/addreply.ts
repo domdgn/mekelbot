@@ -2,7 +2,8 @@ import type { ICommand } from "../interfaces/ICommand.js";
 import { addMessage } from "../utils/messages.js";
 
 const addreply: ICommand = {
-    function: async (context) => {
+    function: async (context, parameters) => {
+        // Mods and broadcaster only
         if (
             !context.msg.userInfo.isMod &&
             !context.msg.userInfo.isBroadcaster
@@ -11,20 +12,11 @@ const addreply: ICommand = {
             return;
         }
 
-        const args = context.text.trim();
-        const spaceIndex = args.indexOf(" ");
+        // !addreply <category> <message>
+        const category = parameters[0]?.toLowerCase();
+        const message = parameters.slice(1).join(" ").trim();
 
-        if (spaceIndex === -1) {
-            await context.reply(
-                "Usage: !addreply <category> <message>"
-            );
-            return;
-        }
-
-        const category = args.slice(0, spaceIndex).toLowerCase();
-        const message = args.slice(spaceIndex + 1).trim();
-
-        if (!message) {
+        if (!category || !message) {
             await context.reply(
                 "Usage: !addreply <category> <message>"
             );
@@ -49,6 +41,7 @@ const addreply: ICommand = {
         }
     },
     name: "addreply",
+    parameters: { aliases: [] },
     description: "Add a message to a reply category (mods only)."
 };
 

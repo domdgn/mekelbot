@@ -4,7 +4,7 @@ import { getMessages } from "../utils/messages.js";
 
 const gg: ICommand = {
     function: async (context) => {
-        await context.reply(getMessages("gg"));
+        await context.reply(selectRandom(getMessages("gg")));
     },
     name: "gg",
     description: "Say gg!"
