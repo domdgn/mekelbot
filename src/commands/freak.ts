@@ -2,7 +2,7 @@ import type { ICommand } from "../interfaces/ICommand.js";
 import { selectRandom } from "../utils/utils.js";
 import { getMessages } from "../utils/messages.js";
 
-export const freak: Command = {
+export const freak: ICommand = {
     function: async (context) => {
         const r = Math.random();
 
