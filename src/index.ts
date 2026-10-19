@@ -4,12 +4,28 @@ import { Bot } from "@twurple/easy-bot";
 import { env } from "./utils/env.js";
 import { createCommands, commands } from "./utils/utils.js";
 
-const authProvider = new StaticAuthProvider(env.clientID, env.accessToken);
+const auth = async () => {
+    const a = new RefreshingAuthProvider({
+        clientId: env.clientID,
+        clientSecret: env.clientSecret,
+    });
+
+    await a.addUserForToken({
+        accessToken: env.accessToken,
+        refreshToken: env.refreshToken,
+        expiresIn: 0,
+        obtainmentTimestamp: 0,
+    });
+
+    a.addIntentsToUser(env.userID, ["chat"]);
+
+    return a;
+};
 
 export const apiClient = new ApiClient({ authProvider });
 
 const bot = new Bot({
-    authProvider,
+    auth();,
     channel: "mekelec_",
     commands: createCommands(commands),
 });
