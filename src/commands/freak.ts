@@ -10,7 +10,7 @@ export const freak: ICommand = {
             await context.reply("Mods. ban this guy.");
             await context.say(`/timeout ${context.userDisplayName} 60`);
         } else {
-            await context.reply(selectRandom(messages.freaky));
+            await context.reply(selectRandom(getMessages("freaky")));
         }
     },
     name: "freak",
