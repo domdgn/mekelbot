@@ -1,10 +1,6 @@
-import messages from "../data/messages.json" with { type: "json" };
-import { writeFile } from "node:fs/promises";
-import { fileURLToPath } from "node:url";
 
-const messagesPath = fileURLToPath(
-    new URL("../data/messages.json", import.meta.url)
-);
+import messages from "../../messages/messages.json" with { type: "json" };
+import { pushMessages } from "./githubHelper.js";
 
 const data: Record<string, string[]> = messages;
 
@@ -14,7 +10,7 @@ export function getMessages(category: string): string[] {
 
 export async function addMessage(
     category: string,
-    message: string
+    message: string,
 ): Promise<boolean> {
     if (!Array.isArray(data[category])) {
         return false;
@@ -26,11 +22,17 @@ export async function addMessage(
 
     data[category].push(message);
 
-    await writeFile(
-        messagesPath,
-        JSON.stringify(data, null, 4) + "\n",
-        "utf8"
-    );
+    try {
+        await pushMessages(data);
+        return true;
+    } catch (error) {
+        // Remove the message we just added if saving fails.
+        const index = data[category].lastIndexOf(message);
+        if (index !== -1) {
+            data[category].splice(index, 1);
+        }
 
-    return true;
+        console.error("Failed to save messages to GitHub:", error);
+        return false;
+    }
 }
