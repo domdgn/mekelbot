@@ -25,17 +25,11 @@ const auth = async () => {
 
 const authenticated = await auth();
 
-authenticated.onRefresh((userID, newToken) => {
-    if (userID == config.userID) {
-        config.accessToken = newToken.accessToken;
-        if (newToken.refreshToken) {
-            config.refreshToken = newToken.refreshToken;
-        }
-        config.save();
-    } else {
-        logger.fatal("The userID returned by twitch is different to the one in the config file. Nothing has been changed and the program will exit");
-        exit();
-    }
+authenticated.onRefresh(async (userId, newToken) => {
+    console.log(`Twitch refreshed the token for user ${userId}.`);
+
+    // Save the new tokens to durable storage here.
+    // Do not log the token values.
 });
 
 const apiClient = new ApiClient({ authProvider: authenticated, });
