@@ -10,6 +10,7 @@ export const env = defineEnv({
     GITHUB_TOKEN: string(),
     refreshToken: string(),
     clientSecret: string(),
+    userID: string(),
 },
 {
     source: loadEnv(),

@@ -3,7 +3,7 @@ import { ApiClient } from "@twurple/api";
 import { Bot } from "@twurple/easy-bot";
 import { env } from "./utils/env.js";
 import { createCommands, commands } from "./utils/utils.js";
-import { exit } from "process";
+
 
 const auth = async () => {
     const a = new RefreshingAuthProvider({
@@ -27,9 +27,7 @@ const authenticated = await auth();
 
 authenticated.onRefresh(async (userId, newToken) => {
     console.log(`Twitch refreshed the token for user ${userId}.`);
-
-    // Save the new tokens to durable storage here.
-    // Do not log the token values.
+    console.log(`New refresh token received: ${Boolean(newToken.refreshToken)}`);
 });
 
 const apiClient = new ApiClient({ authProvider: authenticated, });
