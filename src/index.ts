@@ -1,8 +1,9 @@
-import { StaticAuthProvider } from "@twurple/auth";
+import { RefreshingAuthProvider } from "@twurple/auth";
 import { ApiClient } from "@twurple/api";
 import { Bot } from "@twurple/easy-bot";
 import { env } from "./utils/env.js";
 import { createCommands, commands } from "./utils/utils.js";
+import { exit } from "process";
 
 const auth = async () => {
     const a = new RefreshingAuthProvider({
@@ -22,10 +23,25 @@ const auth = async () => {
     return a;
 };
 
-export const apiClient = new ApiClient({ authProvider });
+const authenticated = await auth();
+
+authenticated.onRefresh((userID, newToken) => {
+    if (userID == config.userID) {
+        config.accessToken = newToken.accessToken;
+        if (newToken.refreshToken) {
+            config.refreshToken = newToken.refreshToken;
+        }
+        config.save();
+    } else {
+        logger.fatal("The userID returned by twitch is different to the one in the config file. Nothing has been changed and the program will exit");
+        exit();
+    }
+});
+
+const apiClient = new ApiClient({ authProvider: authenticated, });
 
 const bot = new Bot({
-    auth();,
+    authProvider: authenticated,
     channel: "mekelec_",
     commands: createCommands(commands),
 });
@@ -50,3 +66,5 @@ bot.onRaid(({ broadcasterName, userName, viewerCount }) => {
 bot.onConnect(() => {
     console.log("woof woof it workin");
 });
+
+export { auth as authProvider, bot, apiClient };
