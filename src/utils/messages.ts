@@ -1,38 +1,61 @@
+import { pushMessages, fetchMessages } from "./githubHelper.js";
 
-import messages from "../../messages/messages.json" with { type: "json" };
-import { pushMessages } from "./githubHelper.js";
+let data: Record<string, string[]> = {};
+let queue: Promise<unknown> = Promise.resolve();
 
-const data: Record<string, string[]> = messages;
+function enqueue<T>(task: () => Promise<T>): Promise<T> {
+    const run = queue.then(task);
+    queue = run.catch(() => {});
+    return run;
+}
+
+export function loadMessages(): Promise<void> {
+    return enqueue(async () => {
+        data = await fetchMessages();
+    });
+}
+
+try {
+    await loadMessages();
+} catch (error) {
+    console.error("Initial message load failed:", error);
+}
+
+setInterval(() => {
+    loadMessages().catch((err) =>
+        console.error("Failed to refresh messages:", err),
+    );
+}, 5 * 60 * 1000);
 
 export function getMessages(category: string): string[] {
     return data[category] ?? [];
 }
 
-export async function addMessage(
+export function addMessage(
     category: string,
     message: string,
 ): Promise<boolean> {
-    if (!Array.isArray(data[category])) {
-        return false;
-    }
+    return enqueue(async () => {
+        try {
+            const latest = await fetchMessages();
 
-    if (data[category].includes(message)) {
-        return false;
-    }
+            if (!Array.isArray(latest[category])) {
+                return false;
+            }
 
-    data[category].push(message);
+            if (latest[category].includes(message)) {
+                data = latest;
+                return false;
+            }
 
-    try {
-        await pushMessages(data);
-        return true;
-    } catch (error) {
-        // Remove the message we just added if saving fails.
-        const index = data[category].lastIndexOf(message);
-        if (index !== -1) {
-            data[category].splice(index, 1);
+            latest[category].push(message);
+            await pushMessages(latest);
+
+            data = latest;
+            return true;
+        } catch (error) {
+            console.error("Failed to save messages to GitHub:", error);
+            return false;
         }
-
-        console.error("Failed to save messages to GitHub:", error);
-        return false;
-    }
+    });
 }
