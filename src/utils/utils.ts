@@ -16,10 +16,11 @@ import { discord } from "../commands/discord.js";
 import { extremegaming } from "../commands/extreme.js";
 import { followage } from "../commands/followage.js";
 import { addreply } from "../commands/addreply.js";
+import { wheatley } from "../commands/wheatley.js";
 
 /** Reference to all commands in the bot. */
-const commands = [ addreply, extremegaming, followage, brown, gold, fortune, isthisgoingtopb, gg, woof, avery, lurk, pb, freak, help, saymyname, discord, ];
-const helpCmds = [ brown, gold, fortune, isthisgoingtopb, gg, woof, avery, lurk, discord, freak, help, ]
+const commands = [ wheatley, addreply, extremegaming, followage, brown, gold, fortune, isthisgoingtopb, gg, woof, avery, lurk, pb, freak, help, saymyname, discord, ];
+const helpCmds = [ brown, gold, wheatley, fortune, isthisgoingtopb, gg, woof, avery, lurk, discord, freak, help, ]
 
 /**
  * Selects a random item from a given list.

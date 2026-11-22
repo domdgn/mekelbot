@@ -7,6 +7,7 @@ const avery: ICommand = {
         await context.reply(selectRandom(getMessages("avery")));
     },
     name: "avery",
+    parameters: { aliases: ["averity", "ave", "HeyItsMeItsAverity"] },
     description: "Random quote ALLEGEDLY from avery"
 };
 
