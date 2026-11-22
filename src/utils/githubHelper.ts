@@ -56,3 +56,18 @@ export async function pushMessages(
         },
     });
 }
+
+export async function fetchMessages(): Promise<Record<string, string[]>> {
+    if (!token || !owner || !repo) {
+        throw new Error("Missing GitHub environment variables");
+    }
+
+    const response = await githubRequest(
+        `${apiUrl}?ref=${encodeURIComponent(branch)}`,
+        {
+            headers: { Accept: "application/vnd.github.raw+json" },
+        },
+    );
+
+    return (await response.json()) as Record<string, string[]>;
+}
